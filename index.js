@@ -11,6 +11,10 @@ module.exports = {
             return {
                 "ObjectExpression": function(node) {
                     node.properties.reduce(function(lastProp, prop) {
+                        if (prop.key === undefined ||
+                                lastProp.key === undefined) {
+                            return prop;
+                        }
                         if (ignoreMethods &&
                                 prop.value.type === "FunctionExpression") {
                             return prop;
